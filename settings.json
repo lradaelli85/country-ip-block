@@ -1,0 +1,9 @@
+{
+  "settings" : {
+                  "geoip_settings_folder": "/opt/geoip/" ,
+                  "geoip_blacklist" : "/opt/geoip/bl_countries.json" ,
+                  "geoip_cctld_list" : "/opt/geoip/countries.json" ,
+                  "geoip_update_url" : "http://www.ipdeny.com/ipblocks/data/aggregated/",
+                  "geoip_cctld_url" : "http://www.ipdeny.com/ipblocks/"
+  }
+}
