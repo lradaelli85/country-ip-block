@@ -38,11 +38,11 @@ class geoip:
 
 
         def startup(self):
-            command('/sbin/ipset create countries list:set').run()
+            command('{} create countries list:set'.format(utils().ipset_bin())).run()
             geoip_settings_folder = utils().settings['geoip_settings_folder']
             for zone in listdir(geoip_settings_folder):
                 if search('[a-z]-aggregated.zone.set$', zone):
-                    command('/sbin/ipset restore -f {}'.format(geoip_settings_folder+zone)).run()
+                    command('{} restore -f {}'.format(utils().ipset_bin(),geoip_settings_folder+zone)).run()
 
 
         def find_country(self,country):
@@ -69,8 +69,8 @@ class geoip:
                 remove('{}{}-aggregated.zone.set'.format(geoip_settings_folder,country))
             except OSError as e:
                 print e
-            command('/sbin/ipset del countries {}_set'.format(country)).run()
-            command('/sbin/ipset destroy {}_set'.format(country)).run()
+            command('{} del countries {}_set'.format(utils().ipset_bin(),country)).run()
+            command('{} destroy {}_set'.format(utils().ipset_bin(),country)).run()
 
 
         def update_subnets(self):
@@ -89,6 +89,6 @@ class geoip:
             bl_countries = self.list_blocked(to_print=False)
             if len(bl_countries) > 0:
                 for country in bl_countries:
-                    print command('/sbin/ipset -L {}_set'.format(country)).print_output()
+                    print command('{} -L {}_set'.format(utils().ipset_bin(),country)).print_output()
             else:
                 print 'No blacklisted country.Nothing to print'

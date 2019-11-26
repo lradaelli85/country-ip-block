@@ -21,7 +21,7 @@ def CheckArgs():
     group.add_argument('-b', action="store_true", help='Use this on boot')
     args = parser.parse_args()
     if args.a :
-        command('/sbin/ipset create countries list:set').run()
+        command('{} create countries list:set'.format(utils().ipset_bin())).run()
         geoip().add_countries_subnet(args.a)
     if args.d:
         geoip().del_countries_subnet(args.d)

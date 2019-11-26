@@ -22,6 +22,10 @@ class utils:
             print '{0:<{h1}s}{1:<{h2}s}'.format(value1,value2,h1=column1_size+3,h2=column2_size)
 
 
+        def ipset_bin(self):
+            return command('which ipset').print_output()
+
+
         def print_headers(self):
             column1_size , column2_size = self.find_max_lenght()
             listof = []
@@ -149,7 +153,7 @@ class utils:
                         for line in config_file.readlines():
                             ipset_file.write('add {}_set {}'.format(country,line))
                         ipset_file.write('add countries {}_set'.format(country))
-                command('/sbin/ipset restore -f {}'.format(set_file)).run()
+                command('{} restore -f {}'.format(self.ipset_bin(),set_file)).run()
 
 
         def del_json_country(self,country):

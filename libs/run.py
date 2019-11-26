@@ -12,7 +12,6 @@ class command:
             self.FNULL = open(devnull, 'w')
 
         def run(self):
-            #FNULL = open(devnull, 'w')
             try:
                 process = subprocess.Popen(split(self.command),stderr=self.FNULL,stdout=self.FNULL)
                 output = process.communicate()
@@ -22,7 +21,6 @@ class command:
             return exit_status
 
         def print_output(self):
-            #FNULL = open(devnull, 'w')
             try:
                 output_ret = subprocess.check_output(split(self.command),stderr=self.FNULL)
             except subprocess.CalledProcessError as e:

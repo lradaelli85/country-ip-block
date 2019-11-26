@@ -22,7 +22,8 @@ def run_setup():
     geoip_libs = '/geoip_libs'
     geoip_bin = 'geosetbl.py'
     geoip_settings_folder = load_json('settings.json')['settings']['geoip_settings_folder']
-    py_lib = syspath[1]+geoip_libs
+    if '/usr/lib/python2.7' in syspath:
+        py_lib = '/usr/lib/python2.7'+geoip_libs
     if not path.isdir(geoip_settings_folder):
         try:
             mkdir(geoip_settings_folder)
