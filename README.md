@@ -116,7 +116,7 @@ sudo iptables -I INPUT -m set --match-set countries src -m limit --limit 10/min 
 sudo iptables -I INPUT 2 -m set --match-set countries src -j DROP
 ```
 
-### block outgoing connections from blacklisted countries
+### block outgoing connections to blacklisted countries
 ```
 sudo iptables -I OUTPUT -m set --match-set countries dst -m limit --limit 10/min -j NFLOG --nflog-prefix  "[COUNTRIES-OUT BLOCK] :"
 sudo iptables -I OUTPUT 2 -m set --match-set countries dst -j DROP
